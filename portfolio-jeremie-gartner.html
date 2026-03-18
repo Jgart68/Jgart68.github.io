@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jérémie Gartner — UI/UX Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --blue:    #1A6BFF;
+  --blue-dk: #0E4FCC;
+  --blue-lt: #EEF3FF;
+  --blue-gl: rgba(26,107,255,0.08);
+  --ink:     #0A0A0F;
+  --ink2:    #3A3A4A;
+  --muted:   #8888A0;
+  --white:   #FFFFFF;
+  --off:     #F7F7FA;
+  --border:  rgba(10,10,15,0.08);
+  --radius:  14px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+.cursor {
+  width: 10px; height: 10px;
+  background: var(--blue); border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transition: transform 0.15s ease, width 0.2s, height 0.2s;
+  transform: translate(-50%,-50%);
+}
+.cursor.hover {
+  width: 32px; height: 32px;
+  background: rgba(26,107,255,0.15);
+  border: 1.5px solid var(--blue);
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.1rem 3rem;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem; letter-spacing: 0.08em; color: var(--ink);
+}
+.nav-logo span { color: var(--blue); }
+.nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+.nav-links a {
+  font-size: 0.83rem; color: var(--muted); text-decoration: none;
+  letter-spacing: 0.04em; font-weight: 400; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  background: var(--blue) !important; color: var(--white) !important;
+  padding: 0.5rem 1.2rem; border-radius: 2rem;
+  font-size: 0.82rem !important; font-weight: 500 !important;
+  transition: background 0.2s, transform 0.15s !important;
+}
+.nav-cta:hover { background: var(--blue-dk) !important; transform: translateY(-1px); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 7rem 3rem 5rem; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(26,107,255,0.12) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  pointer-events: none;
+}
+.hero-blob {
+  position: absolute; width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(26,107,255,0.18) 0%, transparent 70%);
+  top: -100px; right: -150px; pointer-events: none;
+  animation: blob-float 8s ease-in-out infinite;
+}
+@keyframes blob-float {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50%      { transform: translate(-30px,30px) scale(1.05); }
+}
+.hero-inner { max-width: 1000px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border: 1px solid rgba(26,107,255,0.3); background: var(--blue-gl);
+  padding: 0.35rem 0.9rem; border-radius: 2rem;
+  font-size: 0.75rem; color: var(--blue); font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 2rem; animation: fade-up 0.6s ease both;
+}
+.badge-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--blue);
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.5)} }
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 12vw, 10rem);
+  line-height: 0.9; letter-spacing: 0.02em;
+  margin-bottom: 2rem; animation: fade-up 0.6s 0.1s ease both;
+}
+.hero h1 .blue { color: var(--blue); }
+.hero h1 .stroke { -webkit-text-stroke: 2px var(--ink); color: transparent; }
+.hero-sub {
+  max-width: 480px; font-size: 1rem; color: var(--ink2);
+  line-height: 1.7; font-weight: 300; margin-bottom: 2.5rem;
+  animation: fade-up 0.6s 0.2s ease both;
+}
+.hero-sub strong { font-weight: 500; color: var(--ink); }
+.hero-actions {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  animation: fade-up 0.6s 0.3s ease both;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 2rem; border-radius: 3rem;
+  font-size: 0.88rem; font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  border: none; cursor: none; transition: all 0.2s; text-decoration: none;
+}
+.btn-fill { background: var(--blue); color: var(--white); }
+.btn-fill:hover { background: var(--blue-dk); transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
+.btn-ghost:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); }
+.hero-scroll-hint {
+  position: absolute; bottom: 2.5rem; left: 3rem;
+  display: flex; align-items: center; gap: 0.75rem;
+  font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;
+  animation: fade-up 0.6s 0.5s ease both;
+}
+.scroll-line { width: 40px; height: 1px; background: var(--muted); position: relative; overflow: hidden; }
+.scroll-line::after {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: var(--blue); animation: scan 2s ease-in-out infinite;
+}
+@keyframes scan { 0%{left:-100%} 100%{left:100%} }
+@keyframes fade-up { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* MARQUEE */
+.marquee-wrap {
+  overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 0.9rem 0; background: var(--off);
+}
+.marquee-track {
+  display: flex; gap: 0; white-space: nowrap;
+  animation: marquee 20s linear infinite;
+}
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee-item {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.95rem; letter-spacing: 0.14em; color: var(--muted);
+  padding: 0 2rem; display: flex; align-items: center; gap: 2rem;
+}
+.marquee-item::after { content: '✦'; color: var(--blue); font-size: 0.55rem; }
+
+/* PROJETS */
+#projets { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
+.section-eyebrow { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.eyebrow-line { width: 32px; height: 2px; background: var(--blue); }
+.eyebrow-text {
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--blue);
+}
+.section-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.04em;
+  line-height: 1; margin-bottom: 3.5rem; color: var(--ink);
+}
+.projects-grid {
+  display: flex; flex-direction: column; gap: 1.5px;
+  border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden;
+}
+.project-row {
+  display: grid; grid-template-columns: 60px 1fr auto;
+  align-items: center; gap: 2rem; padding: 2rem 2.5rem;
+  background: var(--white); border-bottom: 1px solid var(--border);
+  transition: background 0.2s; cursor: none;
+  position: relative; overflow: hidden;
+}
+.project-row:last-child { border-bottom: none; }
+.project-row:hover { background: var(--blue-lt); }
+.project-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem; color: var(--muted); letter-spacing: 0.06em;
+}
+.project-content h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem; letter-spacing: 0.04em; line-height: 1;
+  margin-bottom: 0.35rem; transition: color 0.2s;
+}
+.project-row:hover .project-content h3 { color: var(--blue); }
+.project-content p { font-size: 0.84rem; color: var(--muted); font-weight: 300; line-height: 1.5; }
+.project-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; }
+.project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end; }
+.tag {
+  font-size: 0.68rem; font-weight: 500; letter-spacing: 0.06em;
+  padding: 0.22rem 0.6rem; border-radius: 1rem; text-transform: uppercase;
+}
+.tag-blue  { background: var(--blue-gl); color: var(--blue); border: 1px solid rgba(26,107,255,0.2); }
+.tag-gray  { background: var(--off); color: var(--muted); border: 1px solid var(--border); }
+.tag-green { background: rgba(16,185,129,0.08); color: #059669; border: 1px solid rgba(16,185,129,0.2); }
+.tag-amber { background: rgba(245,158,11,0.08); color: #d97706; border: 1px solid rgba(245,158,11,0.2); }
+.project-arrow {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: transparent; border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; color: var(--muted); transition: all 0.2s; flex-shrink: 0;
+}
+.project-row:hover .project-arrow { background: var(--blue); border-color: var(--blue); color: var(--white); }
+.project-detail {
+  display: none; padding: 0 2.5rem 2rem;
+  background: var(--blue-lt); border-top: 1px solid rgba(26,107,255,0.1);
+}
+.project-detail.open { display: block; }
+.project-detail p {
+  font-size: 0.88rem; color: var(--ink2); line-height: 1.7; font-weight: 300;
+  max-width: 600px; margin-bottom: 1rem;
+}
+.detail-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.82rem; font-weight: 500; color: var(--blue); text-decoration: none;
+  transition: gap 0.2s;
+}
+.detail-link:hover { gap: 0.7rem; }
+
+/* À PROPOS */
+#apropos { padding: 6rem 3rem; background: var(--ink); position: relative; overflow: hidden; }
+#apropos::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(26,107,255,0.1) 1px, transparent 1px);
+  background-size: 40px 40px; pointer-events: none;
+}
+.about-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+  align-items: start; position: relative; z-index: 1;
+}
+.about-left h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.04em;
+  line-height: 1; color: var(--white); margin-bottom: 1.5rem;
+}
+.about-left h2 .blue { color: var(--blue); }
+.about-left p { font-size: 0.92rem; color: rgba(255,255,255,0.55); line-height: 1.75; font-weight: 300; margin-bottom: 1rem; }
+.about-left p strong { color: var(--white); font-weight: 500; }
+.about-tools { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+.tool-pill {
+  font-size: 0.75rem; font-weight: 500; padding: 0.35rem 0.85rem; border-radius: 2rem;
+  background: rgba(26,107,255,0.15); border: 1px solid rgba(26,107,255,0.3);
+  color: rgba(255,255,255,0.8); letter-spacing: 0.04em;
+}
+.about-right { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-content: start; }
+.stat-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius); padding: 1.5rem;
+}
+.stat-card.accent { background: var(--blue); border-color: var(--blue); grid-column: span 2; }
+.stat-card-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem; letter-spacing: 0.04em; line-height: 1;
+  color: var(--white); margin-bottom: 0.3rem;
+}
+.stat-card.accent .stat-card-num { font-size: 3.5rem; }
+.stat-card-label {
+  font-size: 0.75rem; color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em; text-transform: uppercase; font-weight: 400;
+}
+.stat-card.accent .stat-card-label { color: rgba(255,255,255,0.75); }
+.stat-card-desc { font-size: 0.82rem; color: rgba(255,255,255,0.4); font-weight: 300; margin-top: 0.4rem; line-height: 1.5; }
+
+/* CONTACT */
+#contact { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.contact-left h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 6vw, 5.5rem); letter-spacing: 0.02em; line-height: 0.9;
+  margin-bottom: 1.5rem;
+}
+.contact-left h2 .blue { color: var(--blue); }
+.contact-left h2 .stroke { -webkit-text-stroke: 2px var(--ink); color: transparent; }
+.contact-left p { font-size: 0.92rem; color: var(--ink2); line-height: 1.7; font-weight: 300; margin-bottom: 2rem; }
+.contact-right { display: flex; flex-direction: column; gap: 1rem; }
+.contact-link-card {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1.25rem 1.5rem; border: 1px solid var(--border);
+  border-radius: var(--radius); text-decoration: none;
+  transition: all 0.2s; cursor: none; background: var(--white);
+}
+.contact-link-card:hover { border-color: var(--blue); background: var(--blue-lt); transform: translateX(4px); }
+.clc-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--blue-gl); display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0; border: 1px solid rgba(26,107,255,0.15);
+}
+.clc-text { flex: 1; }
+.clc-label { font-size: 0.7rem; color: var(--muted); font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; }
+.clc-value { font-size: 0.88rem; color: var(--ink); font-weight: 500; }
+.contact-link-card:hover .clc-value { color: var(--blue); }
+.clc-arrow { font-size: 0.8rem; color: var(--muted); transition: transform 0.2s; }
+.contact-link-card:hover .clc-arrow { transform: translateX(4px); color: var(--blue); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border); padding: 2rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem; max-width: 1100px; margin: 0 auto;
+}
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.1em; color: var(--ink); }
+.footer-logo span { color: var(--blue); }
+.footer-copy { font-size: 0.75rem; color: var(--muted); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-size: 0.75rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--blue); }
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .hero, #projets, #contact { padding-left: 1.5rem; padding-right: 1.5rem; }
+  #apropos { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .about-inner, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-right { grid-template-columns: 1fr 1fr; }
+  .project-row { grid-template-columns: 40px 1fr; gap: 1rem; padding: 1.5rem; }
+  .project-meta { display: none; }
+  footer { padding: 1.5rem; }
+  .footer-links { display: none; }
+  .hero-scroll-hint { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <div class="nav-logo">JG<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-blob"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="badge-dot"></span>Disponible · UI/UX Designer</div>
+    <h1>JÉRÉMIE<br><span class="blue">GARTNER</span><span class="stroke">.</span></h1>
+    <p class="hero-sub">
+      Designer UI/UX en formation à Strasbourg.<br>
+      Je conçois des <strong>interfaces pensées pour les gens</strong> — claires, utiles, et avec du caractère.
+    </p>
+    <div class="hero-actions">
+      <a href="#projets" class="btn btn-fill">Voir mes projets →</a>
+      <a href="#contact" class="btn btn-ghost">Me contacter</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint"><span class="scroll-line"></span>Scroll</div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Figma</span><span class="marquee-item">UI Design</span>
+    <span class="marquee-item">UX Research</span><span class="marquee-item">Prototypage</span>
+    <span class="marquee-item">Strasbourg</span><span class="marquee-item">Harry Gatto</span>
+    <span class="marquee-item">Direction artistique</span><span class="marquee-item">Maquettage</span>
+    <span class="marquee-item">Figma</span><span class="marquee-item">UI Design</span>
+    <span class="marquee-item">UX Research</span><span class="marquee-item">Prototypage</span>
+    <span class="marquee-item">Strasbourg</span><span class="marquee-item">Harry Gatto</span>
+    <span class="marquee-item">Direction artistique</span><span class="marquee-item">Maquettage</span>
+  </div>
+</div>
+
+<section id="projets">
+  <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Projets sélectionnés</span></div>
+  <h2 class="section-heading">CE QUE J'AI FAIT</h2>
+  <div class="projects-grid">
+
+    <div class="project-row" onclick="toggleDetail('d1')">
+      <span class="project-num">01</span>
+      <div class="project-content">
+        <h3>Harry Gatto — Direction artistique</h3>
+        <p>Identité visuelle & présence en ligne d'un projet musical électronique indépendant</p>
+      </div>
+      <div class="project-meta">
+        <div class="project-tags">
+          <span class="tag tag-blue">Branding</span>
+          <span class="tag tag-gray">Direction artistique</span>
+          <span class="tag tag-blue">Bandcamp</span>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+    <div class="project-detail" id="d1">
+      <p>Gestion complète de l'image du projet musical <strong>Harry Gatto</strong> basé à Strasbourg — un univers électronique qui mêle indie pop, synthwave et country-alt. De la conception visuelle à la communication sur les plateformes musicales.</p>
+      <p>Choix typographiques, palette de couleurs, cohérence visuelle sur tous les supports. Un projet personnel qui m'a appris à défendre et construire une identité de A à Z.</p>
+      <a href="https://harrygatto.bandcamp.com" target="_blank" class="detail-link">Écouter sur Bandcamp →</a>
+    </div>
+
+    <div class="project-row" onclick="toggleDetail('d2')">
+      <span class="project-num">02</span>
+      <div class="project-content">
+        <h3>La Fournée — Plateforme boulangeries rurales</h3>
+        <p>Site vitrine & commande en ligne pour boulangeries souhaitant développer leur clientèle</p>
+      </div>
+      <div class="project-meta">
+        <div class="project-tags">
+          <span class="tag tag-amber">En cours</span>
+          <span class="tag tag-blue">UI/UX</span>
+          <span class="tag tag-gray">Figma</span>
+          <span class="tag tag-gray">Équipe</span>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+    <div class="project-detail" id="d2">
+      <p>Projet fil rouge de formation (SERFA / Université Haute-Alsace). Conception d'une plateforme permettant aux boulangeries rurales de proposer leurs produits par catégorie et d'accepter des inscriptions clients avec boulangeries favorites.</p>
+      <p>Travail en équipe de 3 : cahier des charges, maquettes Figma, design system 3 couleurs, développement web. Soutenance prévue le <strong>3 juin 2025</strong>.</p>
+    </div>
+
+    <div class="project-row" onclick="toggleDetail('d3')">
+      <span class="project-num">03</span>
+      <div class="project-content">
+        <h3>App conseil énergie — Communes rurales</h3>
+        <p>Interface mobile pour une association d'accompagnement à la transition énergétique</p>
+      </div>
+      <div class="project-meta">
+        <div class="project-tags">
+          <span class="tag tag-green">Stage</span>
+          <span class="tag tag-blue">Figma</span>
+          <span class="tag tag-gray">Mobile</span>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+    <div class="project-detail" id="d3">
+      <p>Conception d'une maquette Figma pour une association proposant des conseils en économie d'énergie auprès des communes. Réalisée en une semaine de stage, de l'analyse des besoins à la livraison de la maquette finalisée.</p>
+      <p>Contraintes de temps fortes, travail en autonomie. Une expérience qui m'a appris à aller à l'essentiel rapidement.</p>
+      <a href="#" class="detail-link">Voir la maquette Figma →</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="apropos">
+  <div class="about-inner">
+    <div class="about-left">
+      <div class="section-eyebrow" style="margin-bottom:1rem">
+        <div class="eyebrow-line"></div><span class="eyebrow-text">À propos</span>
+      </div>
+      <h2>DESIGNER<br>CURIEUX,<br><span class="blue">MUSICIEN</span><br>DISCRET.</h2>
+      <p>Je suis en formation à Strasbourg, en train de construire une double compétence entre <strong>développement web</strong> et <strong>design d'interface</strong>. Ce qui me motive, c'est de rendre les choses simples sans les appauvrir.</p>
+      <p>En parallèle, je crée de la musique sous le nom <strong>Harry Gatto</strong> — electronic, indie pop, synthwave. Gérer une identité artistique m'a autant appris sur le design que sur la communication.</p>
+      <p>Disponible pour des missions freelance, des stages et alternances.</p>
+      <div class="about-tools">
+        <span class="tool-pill">Figma</span>
+        <span class="tool-pill">Prototypage</span>
+        <span class="tool-pill">UX Research</span>
+        <span class="tool-pill">HTML/CSS</span>
+        <span class="tool-pill">Design system</span>
+        <span class="tool-pill">Direction artistique</span>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="stat-card">
+        <div class="stat-card-num">3</div>
+        <div class="stat-card-label">Projets</div>
+        <div class="stat-card-desc">Dont un en production</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-num">2025</div>
+        <div class="stat-card-label">Formation</div>
+        <div class="stat-card-desc">PMD — SERFA Strasbourg</div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-card-num">Harry Gatto</div>
+        <div class="stat-card-label">Projet musical indépendant</div>
+        <div class="stat-card-desc">Electronic · Indie pop · Synthwave · Country-alt — Strasbourg</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-left">
+      <div class="section-eyebrow" style="margin-bottom:1rem">
+        <div class="eyebrow-line"></div><span class="eyebrow-text">Contact</span>
+      </div>
+      <h2>ON<br><span class="blue">TRAVAILLE</span><br><span class="stroke">ENSEMBLE</span><br>?</h2>
+      <p>Disponible pour des missions freelance, des stages ou une alternance. N'hésite pas à m'envoyer un message — je réponds vite.</p>
+      <a href="mailto:jeremie.gartner@email.com" class="btn btn-fill">M'envoyer un email →</a>
+    </div>
+    <div class="contact-right">
+      <a href="mailto:jeremie.gartner@email.com" class="contact-link-card">
+        <div class="clc-icon">✉</div>
+        <div class="clc-text">
+          <div class="clc-label">Email</div>
+          <div class="clc-value">jeremie.gartner@email.com</div>
+        </div>
+        <span class="clc-arrow">→</span>
+      </a>
+      <a href="https://harrygatto.bandcamp.com" target="_blank" class="contact-link-card">
+        <div class="clc-icon">♪</div>
+        <div class="clc-text">
+          <div class="clc-label">Musique</div>
+          <div class="clc-value">harrygatto.bandcamp.com</div>
+        </div>
+        <span class="clc-arrow">→</span>
+      </a>
+      <a href="#" class="contact-link-card">
+        <div class="clc-icon">in</div>
+        <div class="clc-text">
+          <div class="clc-label">LinkedIn</div>
+          <div class="clc-value">Jérémie Gartner</div>
+        </div>
+        <span class="clc-arrow">→</span>
+      </a>
+      <a href="#" class="contact-link-card">
+        <div class="clc-icon">◈</div>
+        <div class="clc-text">
+          <div class="clc-label">Figma — Portfolio</div>
+          <div class="clc-value">Voir mes maquettes</div>
+        </div>
+        <span class="clc-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">JG<span>.</span></div>
+  <span class="footer-copy">© 2025 Jérémie Gartner — Strasbourg</span>
+  <div class="footer-links">
+    <a href="#projets">Projets</a>
+    <a href="#apropos">À propos</a>
+    <a href="#contact">Contact</a>
+    <a href="https://harrygatto.bandcamp.com" target="_blank">Harry Gatto ↗</a>
+  </div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top  = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, .project-row').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
+
+function toggleDetail(id) {
+  const detail = document.getElementById(id);
+  const isOpen = detail.classList.contains('open');
+  document.querySelectorAll('.project-detail').forEach(d => d.classList.remove('open'));
+  if (!isOpen) detail.classList.add('open');
+}
+
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--blue)' : '';
+  });
+});
+</script>
+</body>
+</html>
