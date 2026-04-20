@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html class="light" lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-dim": "#dadada",
+                        "surface-container-high": "#e8e8e8",
+                        "primary-fixed-dim": "#832700",
+                        "on-primary-container": "#ffffff",
+                        "on-primary-fixed-variant": "#ffdbcf",
+                        "secondary": "#5e5e5e",
+                        "surface-tint": "#ab3600",
+                        "on-tertiary": "#e4e2e2",
+                        "primary-fixed": "#ab3600",
+                        "surface-container": "#eeeeee",
+                        "background": "#f9f9f9",
+                        "on-surface": "#1a1c1c",
+                        "outline-variant": "#c6c6c6",
+                        "surface": "#f9f9f9",
+                        "primary": "#000000",
+                        "on-background": "#1a1c1c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#474747",
+                        "outline": "#777777",
+                        "inverse-surface": "#2f3131"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    }
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>CASE_01 — Harry Gatto // Jérémie Gartner</title>
+    <style>
+        html { scroll-behavior: smooth; }
+        .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
+        body { min-height: max(884px, 100dvh); }
+        @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .ticker-wrapper { width: max-content; animation: ticker-scroll 25s linear infinite; will-change: transform; }
+        .ticker { display: inline-block; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-up { animation: fadeUp 0.6s ease forwards; }
+        .fade-up-1 { animation-delay: 0.1s; opacity: 0; }
+        .fade-up-2 { animation-delay: 0.25s; opacity: 0; }
+        .fade-up-3 { animation-delay: 0.4s; opacity: 0; }
+    </style>
+</head>
+
+<body class="bg-surface font-body text-on-surface selection:bg-orange-600 selection:text-white">
+
+    <!-- NAV -->
+    <nav id="navbar" class="fixed bottom-0 left-0 w-full z-50 flex items-stretch h-16 bg-white border-t-2 border-black md:top-0 md:bottom-auto md:border-t-0 md:border-b-2 md:justify-between md:px-8">
+        <div class="hidden md:flex items-center flex-shrink-0">
+            <a href="../index.html" class="font-['Space_Grotesk'] text-sm font-bold uppercase tracking-widest text-black hover:text-orange-600 transition-colors duration-75">
+                JÉRÉMIE GARTNER
+            </a>
+        </div>
+        <div class="flex justify-around items-stretch flex-1 md:flex-none md:flex md:items-center md:gap-10">
+            <a href="../index.html#accueil" class="nav-link flex flex-col items-center justify-center gap-0.5 p-2 h-full flex-1 md:flex-none md:flex-row md:h-auto md:py-0 md:gap-0 text-black hover:text-orange-600 font-['Space_Grotesk'] text-[10px] md:text-xs font-bold uppercase tracking-tighter transition-colors duration-75">
+                <span class="material-symbols-outlined text-xl md:hidden">home</span>
+                <span>ACCUEIL</span>
+            </a>
+            <a href="../index.html#projets" class="nav-link flex flex-col items-center justify-center gap-0.5 p-2 h-full flex-1 md:flex-none md:flex-row md:h-auto md:py-0 md:gap-0 text-orange-600 font-['Space_Grotesk'] text-[10px] md:text-xs font-bold uppercase tracking-tighter transition-colors duration-75">
+                <span class="material-symbols-outlined text-xl md:hidden">folder_open</span>
+                <span>PROJETS</span>
+            </a>
+            <a href="../index.html#methode" class="nav-link flex flex-col items-center justify-center gap-0.5 p-2 h-full flex-1 md:flex-none md:flex-row md:h-auto md:py-0 md:gap-0 text-black hover:text-orange-600 font-['Space_Grotesk'] text-[10px] md:text-xs font-bold uppercase tracking-tighter transition-colors duration-75">
+                <span class="material-symbols-outlined text-xl md:hidden">architecture</span>
+                <span>MÉTHODE</span>
+            </a>
+            <a href="../index.html#apropos" class="nav-link flex flex-col items-center justify-center gap-0.5 p-2 h-full flex-1 md:flex-none md:flex-row md:h-auto md:py-0 md:gap-0 text-black hover:text-orange-600 font-['Space_Grotesk'] text-[10px] md:text-xs font-bold uppercase tracking-tighter transition-colors duration-75">
+                <span class="material-symbols-outlined text-xl md:hidden">person</span>
+                <span>À PROPOS</span>
+            </a>
+        </div>
+        <div class="hidden md:flex items-center flex-shrink-0">
+            <a href="mailto:jeremie.gartner@gmail.com" class="bg-black text-white font-['Space_Grotesk'] text-xs font-bold uppercase tracking-widest px-5 py-2 hover:bg-orange-600 transition-colors duration-75">CONTACT</a>
+        </div>
+    </nav>
+
+    <main class="pb-16 md:pb-0 md:pt-16 overflow-x-hidden">
+
+        <!-- HERO -->
+        <section class="relative overflow-hidden p-4 md:px-16 md:py-20 border-b-2 border-primary bg-surface-container-lowest">
+            <div class="absolute top-2 right-2 md:top-4 md:right-8 opacity-10 font-label font-black select-none pointer-events-none leading-none text-6xl md:text-[12rem]">01</div>
+
+            <div class="relative z-10 max-w-5xl mx-auto">
+                <!-- Breadcrumb -->
+                <div class="flex items-center gap-2 mb-6 fade-up fade-up-1">
+                    <a href="../index.html#projets" class="font-label text-[10px] uppercase text-outline hover:text-orange-600 transition-colors">← SÉLECTION_TRAVAUX</a>
+                    <span class="font-label text-[10px] text-outline">//</span>
+                    <span class="font-label text-[10px] uppercase text-outline">CASE_01</span>
+                </div>
+
+                <!-- Tags + année -->
+                <div class="flex flex-wrap gap-2 mb-4 fade-up fade-up-1">
+                    <span class="bg-orange-600 text-white px-2 py-0.5 font-label text-[10px] uppercase">PROD_MUSICALE</span>
+                    <span class="bg-orange-600 text-white px-2 py-0.5 font-label text-[10px] uppercase">DESIGN_VISUEL</span>
+                    <span class="border border-primary px-2 py-0.5 font-label text-[10px] uppercase text-outline">2020_MANIFEST</span>
+                </div>
+
+                <!-- Titre -->
+                <div class="flex flex-col gap-0 mb-6 fade-up fade-up-2">
+                    <h1 class="font-headline font-bold leading-none tracking-tighter uppercase text-5xl md:text-[6rem] lg:text-[8rem]">HARRY</h1>
+                    <h1 class="font-headline font-bold leading-none tracking-tighter uppercase text-orange-600 text-5xl md:text-[6rem] lg:text-[8rem]">GATTO</h1>
+                </div>
+
+                <!-- Résumé + meta -->
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between md:gap-16 fade-up fade-up-3">
+                    <p class="text-sm md:text-base font-body leading-relaxed max-w-md">
+                        Identité visuelle et stratégie de présence sociale pour Harry Gatto, artiste musical indépendant (moi!). Un projet complet allant du branding à la direction artistique de l'ensemble des supports de communication.
+                    </p>
+                    <div class="hidden md:flex flex-col gap-1 text-right">
+                        <span class="font-label text-[10px] text-outline uppercase">RÔLE_DESIGNER</span>
+                        <span class="font-label text-xs font-bold uppercase">UX / UI + DIRECTION ARTISTIQUE</span>
+                        <span class="font-label text-[10px] text-outline uppercase mt-2">DURÉE_PROJET</span>
+                        <span class="font-label text-xs font-bold uppercase">NON DEFINIE</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-end mt-6 md:mt-10">
+                    <span class="font-label text-[10px] text-outline uppercase">REF: CASE_01 // HARRY_GATTO_2023</span>
+                    <span class="font-label text-[10px] text-outline uppercase">ARCHIVE_V1.0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- TICKER -->
+        <div class="bg-orange-600 text-white py-2 overflow-hidden hidden md:block border-b border-orange-700">
+            <div class="ticker-wrapper flex">
+                <p class="ticker font-label text-[10px] uppercase tracking-widest whitespace-nowrap pr-16">
+                    HARRY_GATTO &nbsp;//&nbsp; IDENTITÉ_VISUELLE &nbsp;//&nbsp; BRANDING_MUSICAL &nbsp;//&nbsp; DIRECTION_ARTISTIQUE &nbsp;//&nbsp; STRATÉGIE_SOCIALE &nbsp;//&nbsp; CASE_01 &nbsp;//&nbsp; 2023_MANIFEST &nbsp;//&nbsp; PROD_MUSICALE
+                </p>
+                <p class="ticker font-label text-[10px] uppercase tracking-widest whitespace-nowrap pr-16" aria-hidden="true">
+                    HARRY_GATTO &nbsp;//&nbsp; IDENTITÉ_VISUELLE &nbsp;//&nbsp; BRANDING_MUSICAL &nbsp;//&nbsp; DIRECTION_ARTISTIQUE &nbsp;//&nbsp; STRATÉGIE_SOCIALE &nbsp;//&nbsp; CASE_01 &nbsp;//&nbsp; 2023_MANIFEST &nbsp;//&nbsp; PROD_MUSICALE
+                </p>
+            </div>
+        </div>
+
+        <!-- IMAGE PRINCIPALE -->
+        <section class="border-b-2 border-primary">
+            <div class="md:grid md:grid-cols-2">
+                <div class="border-b-2 md:border-b-0 md:border-r-2 border-primary overflow-hidden">
+                    <img src="../img/0038906005_10.jpg" alt="Harry Gatto — pochette" class="w-full h-full object-cover aspect-square md:aspect-auto" style="max-height: 600px;" />
+                </div>
+                <div class="p-6 md:p-12 flex flex-col justify-between bg-white">
+                    <div>
+                        <div class="flex items-center gap-2 mb-6">
+                            <span class="font-label text-[10px] bg-primary text-white px-2 py-0.5">DATA_SHEET</span>
+                        </div>
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold uppercase tracking-tighter leading-tight mb-6">FICHE_TECHNIQUE<br>DU PROJET</h2>
+
+                        <div class="grid grid-cols-2 gap-x-8 gap-y-5">
+                            <div>
+                                <span class="font-label text-[10px] uppercase text-outline block mb-1">CLIENT</span>
+                                <span class="font-label text-sm font-bold uppercase">Harry Gatto</span>
+                            </div>
+                            <div>
+                                <span class="font-label text-[10px] uppercase text-outline block mb-1">ANNÉE</span>
+                                <span class="font-label text-sm font-bold uppercase">Depuis 2023</span>
+                            </div>
+                            <div>
+                                <span class="font-label text-[10px] uppercase text-outline block mb-1">SECTEUR</span>
+                                <span class="font-label text-sm font-bold uppercase">Musique indé</span>
+                            </div>
+                            <div>
+                                <span class="font-label text-[10px] uppercase text-outline block mb-1">TYPE</span>
+                                <span class="font-label text-sm font-bold uppercase">Branding complet</span>
+                            </div>
+                            <div class="col-span-2">
+                                <span class="font-label text-[10px] uppercase text-outline block mb-1">LIVRABLES</span>
+                                <span class="font-label text-sm font-bold uppercase">Identité visuelle, Réseaux sociaux, Direction artistique</span>
+                            </div>
+                            <div class="col-span-2">
+                                <span class="font-label text-[10px] uppercase text-outline block mb-1">OUTILS</span>
+                                <span class="font-label text-sm font-bold uppercase">Figma, Adobe Illustrator, Spline3D</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-primary-fixed/30 pt-5 mt-6">
+                        <span class="font-label text-[10px] uppercase text-orange-600 font-bold">STATUT: LIVRÉ</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTEXTE -->
+        <section class="p-4 md:px-8 md:py-16 border-b-2 border-primary bg-surface-container">
+            <div class="max-w-5xl mx-auto">
+                <div class="px-4 py-3 mb-8 border-b border-primary flex justify-between items-center -mx-4 md:-mx-0 md:border md:border-primary md:mb-10 md:p-4 bg-surface-container-lowest">
+                    <span class="font-label text-xs font-bold uppercase tracking-tighter">CONTEXTE_PROJET</span>
+                    <span class="font-label text-[10px] text-outline">MODULE_01</span>
+                </div>
+                <div class="md:grid md:grid-cols-3 md:gap-12">
+                    <div class="md:col-span-2">
+                        <h2 class="font-headline text-2xl md:text-4xl font-bold uppercase tracking-tighter leading-tight mb-6">
+                            CONSTRUIRE UNE<br>IDENTITÉ MUSICALE
+                        </h2>
+                        <div class="flex flex-col gap-4 text-sm leading-relaxed">
+                            <p>Harry Gatto est un artiste musical indépendant en quête d'une identité visuelle forte et cohérente. Le projet consistait à concevoir l'ensemble de sa communication visuelle, de la pochette d'album aux visuels de réseaux sociaux.</p>
+                            <p>La direction artistique devait refléter un univers musical mêlant influences rétro et esthétique contemporaine — une tension créative au cœur de toutes les décisions de design.</p>
+                        </div>
+                    </div>
+                    <div class="mt-8 md:mt-0 border border-primary bg-white p-5">
+                        <span class="font-label text-[10px] uppercase text-outline block mb-4">OBJECTIFS_MISSION</span>
+                        <ul class="flex flex-col gap-3">
+                            <li class="flex gap-3 items-start">
+                                <span class="font-label text-[10px] text-orange-600 font-bold mt-0.5">01</span>
+                                <span class="font-label text-xs uppercase font-bold">Définir une identité visuelle différenciante</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="font-label text-[10px] text-orange-600 font-bold mt-0.5">02</span>
+                                <span class="font-label text-xs uppercase font-bold">Concevoir les assets pour les plateformes sociales</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="font-label text-[10px] text-orange-600 font-bold mt-0.5">03</span>
+                                <span class="font-label text-xs uppercase font-bold">Direction artistique des visuels promotionnels</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="font-label text-[10px] text-orange-600 font-bold mt-0.5">04</span>
+                                <span class="font-label text-xs uppercase font-bold">Créer un système déclinable et cohérent</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISUELS GALERIE -->
+        <section class="border-b-2 border-primary">
+            <div class="px-4 md:px-8 py-3 border-b border-primary bg-surface-container flex justify-between items-center">
+                <span class="font-label text-xs font-bold uppercase tracking-tighter">GALERIE_VISUELS</span>
+                <span class="font-label text-[10px] text-outline">MODULE_02</span>
+            </div>
+            <!-- Bannière Spotify -->
+            <div class="border-b-2 border-primary overflow-hidden flex" style="height: 400px">
+                <img src="../img/bannierespotify1.png.png" alt="Harry Gatto — bannière Spotify" class="w-full object-cover" />
+            </div>
+            <!-- Pochette album -->
+            <div class="md:grid md:grid-cols-2 border-b border-primary">
+                <div class="border-b md:border-b-0 md:border-r-2 border-primary overflow-hidden bg-black">
+                    <img src="../img/CanvaBroken.jpeg" alt="Harry Gatto — pochette album" class="w-full h-full object-cover" style="max-height: 400px;" />
+                </div>
+                <div class="p-6 md:p-12 bg-white flex flex-col justify-center">
+                    <span class="font-label text-[10px] uppercase text-outline mb-3">LIVRABLE_PRINCIPAL</span>
+                    <h3 class="font-headline text-xl md:text-2xl font-bold uppercase tracking-tighter mb-4">POCHETTE<br>D'ALBUM</h3>
+                    <p class="text-sm leading-relaxed text-on-surface-variant">
+                        Concept visuel centré sur l'avatar illustré de l'artiste — un personnage cartoon aux traits expressifs qui incarne l'univers décalé et authentique de Harry Gatto. La palette de couleurs pastel et le fond texturé en grain créent une identité immédiatement reconnaissable.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROCESS -->
+        <section class="p-4 md:px-8 md:py-16 border-b-2 border-primary bg-white">
+            <div class="max-w-5xl mx-auto">
+                <div class="border border-primary p-4 mb-8 md:mb-10 flex justify-between items-center bg-surface-container">
+                    <span class="font-label text-xs font-bold uppercase tracking-tighter">PROCESS_DESIGN</span>
+                    <span class="font-label text-[10px] text-outline">MODULE_03</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-0 border border-primary">
+                    <div class="border-b md:border-b-0 md:border-r border-primary p-5 flex flex-col gap-3">
+                        <span class="font-label text-[10px] text-orange-600 font-bold uppercase">PHASE_01</span>
+                        <h4 class="font-headline text-base font-bold uppercase">BRIEF</h4>
+                        <p class="text-xs leading-relaxed text-on-surface-variant">Analyse de l'univers artistique et des références visuelles de l'artiste.</p>
+                        <span class="font-label text-[10px] uppercase text-outline border-t border-primary pt-3 mt-auto">DISCOVER</span>
+                    </div>
+                    <div class="border-b md:border-b-0 md:border-r border-primary p-5 flex flex-col gap-3">
+                        <span class="font-label text-[10px] text-orange-600 font-bold uppercase">PHASE_02</span>
+                        <h4 class="font-headline text-base font-bold uppercase">CONCEPT</h4>
+                        <p class="text-xs leading-relaxed text-on-surface-variant">Exploration de directions créatives et développement du personnage illustré.</p>
+                        <span class="font-label text-[10px] uppercase text-outline border-t border-primary pt-3 mt-auto">IDEATE</span>
+                    </div>
+                    <div class="border-b md:border-b-0 md:border-r border-primary p-5 flex flex-col gap-3">
+                        <span class="font-label text-[10px] text-orange-600 font-bold uppercase">PHASE_03</span>
+                        <h4 class="font-headline text-base font-bold uppercase">DESIGN</h4>
+                        <p class="text-xs leading-relaxed text-on-surface-variant">Production des assets visuels : pochette, bannières, visuels sociaux.</p>
+                        <span class="font-label text-[10px] uppercase text-outline border-t border-primary pt-3 mt-auto">EXECUTE</span>
+                    </div>
+                    <div class="p-5 flex flex-col gap-3">
+                        <span class="font-label text-[10px] text-orange-600 font-bold uppercase">PHASE_04</span>
+                        <h4 class="font-headline text-base font-bold uppercase">LIVRAISON</h4>
+                        <p class="text-xs leading-relaxed text-on-surface-variant">Remise des fichiers sources et guide d'utilisation de la charte graphique.</p>
+                        <span class="font-label text-[10px] uppercase text-outline border-t border-primary pt-3 mt-auto">DELIVER</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NAVIGATION PROJETS -->
+        <section class="border-b-2 border-primary">
+            <div class="px-4 md:px-8 py-3 border-b border-primary bg-surface-container flex justify-between items-center">
+                <span class="font-label text-xs font-bold uppercase tracking-tighter">NAVIGATION_PROJETS</span>
+                <span class="font-label text-[10px] text-outline">END_OF_FILE</span>
+            </div>
+            <div class="md:grid md:grid-cols-2">
+                <a href="../index.html#projets" class="group flex justify-between items-center p-6 md:p-8 border-b md:border-b-0 md:border-r border-primary bg-white hover:bg-black transition-colors duration-200">
+                    <div>
+                        <span class="font-label text-[10px] text-outline group-hover:text-white/50 block mb-1">← RETOUR</span>
+                        <span class="font-headline text-lg font-bold uppercase group-hover:text-white">TOUS LES PROJETS</span>
+                    </div>
+                    <span class="material-symbols-outlined text-2xl group-hover:text-white">arrow_back</span>
+                </a>
+                <a href="part-pain.html" class="group flex justify-between items-center p-6 md:p-8 bg-white hover:bg-blue-600 transition-colors duration-200">
+                    <div>
+                        <span class="font-label text-[10px] text-outline group-hover:text-white/70 block mb-1">SUIVANT → CASE_02</span>
+                        <span class="font-headline text-lg font-bold uppercase group-hover:text-white">PART-PAIN</span>
+                    </div>
+                    <span class="material-symbols-outlined text-2xl group-hover:text-white">arrow_forward</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="
+            flex flex-col md:flex-row md:justify-between md:items-center
+            gap-3 px-4 md:px-8 py-5
+            bg-black text-white
+        ">
+            <span class="font-['Space_Grotesk'] text-xs font-bold uppercase monospaced">
+                JÉRÉMIE GARTNER // DESIGN_SYS_01
+            </span>
+
+            <span class="font-['Space_Grotesk'] text-xs monospaced uppercase text-gray-500 hidden md:block">
+                © 2026 JÉRÉMIE GARTNER // ARCHIVE_V1.0
+            </span>
+
+            <div class="flex flex-wrap gap-x-6 gap-y-2">
+                <a class="font-['Space_Grotesk'] text-xs monospaced uppercase
+                          no-underline hover:text-orange-600 transition-colors duration-75" href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://fr.linkedin.com/in/j%25C3%25A9r%25C3%25A9mie-gartner-586289281&ved=2ahUKEwjo2NaJ4q6TAxVhQqQEHR4uM0EQFnoECCUQAQ&usg=AOvVaw2wGbi6AYRmj-TkckmDQEgQ" target="_blank">
+                    LINKEDIN
+                </a>
+                <a class="font-['Space_Grotesk'] text-xs monospaced uppercase
+                          no-underline hover:text-orange-600 transition-colors duration-75" href="https://github.com/Jgart68" target="_blank">
+                    GITHUB
+                </a>
+                <a class="font-['Space_Grotesk'] text-xs monospaced uppercase
+                          no-underline hover:text-orange-600 transition-colors duration-75" href="mailto:jeremie.gartner@gmail.com" target="_blank">
+                    EMAIL
+                </a>
+            </div>
+        </footer>
+
+    </main>
+</body>
+</html>
